@@ -1,0 +1,17 @@
+{
+    "name": "igdr/layout-component-bundle",
+    "type": "symfony-bundle",
+    "description": "Layout Component Bundle",
+    "keywords": ["Igdr", "Layout", "Component"],
+    "require": {
+        "php": ">=5.3.3",
+        "symfony/symfony": "2.5.*",
+        "twig/extensions": "~1.0"
+    },
+    "autoload": {
+        "psr-0": {
+            "Igdr\\Bundle\\LayoutComponentBundle": ""
+        }
+    },
+    "target-dir": "Igdr/Bundle/LayoutComponentBundle"
+}
