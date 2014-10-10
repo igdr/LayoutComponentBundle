@@ -1,6 +1,6 @@
 <?php
 
-namespace Igdr\Bundle\ResourceBundle\DependencyInjection;
+namespace Igdr\Bundle\LayoutComponentBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
@@ -19,7 +19,7 @@ class ComponentConfiguration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode    = $treeBuilder->root('components');
+        $rootNode    = $treeBuilder->root('places');
 
         $this->addResourcesSection($rootNode);
 
@@ -35,16 +35,24 @@ class ComponentConfiguration implements ConfigurationInterface
     {
         $node
             ->children()
-                ->arrayNode('components')
+                ->arrayNode('places')
                     ->useAttributeAsKey('name')
                     ->prototype('array')
                         ->children()
-                            ->scalarNode('controller')
-                                ->cannotBeEmpty()
-                            ->end()
-                            ->arrayNode('routes')
+                            ->arrayNode('components')
                                 ->useAttributeAsKey('name')
-                                ->prototype('scalar')
+                                ->prototype('array')
+                                    ->children()
+                                        ->scalarNode('controller')
+                                            ->cannotBeEmpty()
+                                        ->end()
+                                        ->scalarNode('ordering')
+                                        ->end()
+                                        ->arrayNode('routes')
+                                            ->prototype('scalar')
+                                            ->end()
+                                        ->end()
+                                ->end()
                             ->end()
                         ->end()
                 ->end()

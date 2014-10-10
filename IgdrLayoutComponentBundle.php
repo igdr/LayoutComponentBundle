@@ -1,6 +1,6 @@
 <?php
 
-namespace Igdr\Bundle\ResourceBundle;
+namespace Igdr\Bundle\LayoutComponentBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 

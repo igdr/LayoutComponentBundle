@@ -1,11 +1,13 @@
 services:
-    resource.controller.abstract:
-        class: Igdr\Bundle\ResourceBundle\Controller\ResourceController
+    igdr_layout_component.component.manager:
+        arguments: [%igdr_layout_component.places%]
+        class: Igdr\Bundle\LayoutComponentBundle\Component\Manager
         calls:
             - [setContainer, [@service_container]]
 
-    resource.controller.configuration_factory:
-        class: Igdr\Bundle\ResourceBundle\Controller\ConfigurationFactory
-        arguments: [@request_stack, %igdr_resource.config.defaults%]
+    igdr_layout_component.twig.component_extention:
+        class: Igdr\Bundle\LayoutComponentBundle\Twig\ComponentExtension
         calls:
-            - [setManagerFactory, [@igdr_manager.manager.factory]]
+            - [setManager, [@igdr_layout_component.component.manager]]
+        tags:
+            - { name: twig.extension }

@@ -1,8 +1,7 @@
 <?php
 
-namespace Igdr\Bundle\ResourceBundle\DependencyInjection;
+namespace Igdr\Bundle\LayoutComponentBundle\DependencyInjection;
 
-use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
@@ -18,54 +17,9 @@ class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder()
     {
-        $builder = new TreeBuilder();
-        $rootNode = $builder->root('igdr_resource', 'array');
-
-        $this->addResourcesSection($rootNode);
+        $builder  = new TreeBuilder();
+        $rootNode = $builder->root('igdr_layout_component', 'array');
 
         return $builder;
-    }
-
-    /**
-     * Adds `resources` section.
-     *
-     * @param ArrayNodeDefinition $node
-     */
-    private function addResourcesSection(ArrayNodeDefinition $node)
-    {
-        $node
-            ->children()
-                ->arrayNode('controller')
-                    ->children()
-                        ->arrayNode('index')
-                            ->children()
-                                ->scalarNode('template')
-                                    ->cannotBeEmpty()
-                                ->end()
-                                ->scalarNode('redirect')
-                                    ->cannotBeEmpty()
-                                ->end()
-                            ->end()
-                        ->end()
-                        ->arrayNode('edit')
-                            ->children()
-                                ->scalarNode('template')
-                                    ->cannotBeEmpty()
-                                ->end()
-                                ->scalarNode('redirect')
-                                    ->cannotBeEmpty()
-                                ->end()
-                            ->end()
-                        ->end()
-                        ->arrayNode('delete')
-                            ->children()
-                                ->scalarNode('redirect')
-                                    ->cannotBeEmpty()
-                                ->end()
-                            ->end()
-                        ->end()
-                    ->end()
-                ->end()
-            ->end();
     }
 }
