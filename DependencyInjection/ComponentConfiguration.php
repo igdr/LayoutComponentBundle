@@ -47,6 +47,7 @@ class ComponentConfiguration implements ConfigurationInterface
                                             ->cannotBeEmpty()
                                         ->end()
                                         ->scalarNode('ordering')
+                                            ->defaultValue('500')
                                         ->end()
                                         ->arrayNode('routes')
                                             ->prototype('scalar')
