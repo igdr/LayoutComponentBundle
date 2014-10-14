@@ -8,6 +8,6 @@ services:
     igdr_layout_component.twig.component_extention:
         class: Igdr\Bundle\LayoutComponentBundle\Twig\ComponentExtension
         calls:
-            - [setManager, [@igdr_layout_component.component.component_manager]]
+            - [setComponentManager, [@igdr_layout_component.component.component_manager]]
         tags:
             - { name: twig.extension }
