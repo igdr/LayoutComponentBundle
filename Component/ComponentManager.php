@@ -68,8 +68,13 @@ class ComponentManager implements ContainerAwareInterface
      */
     private function isRendered(Component $component)
     {
+        $routes = $component->getRoutes();
+        if (empty($routes)) {
+            return true;
+        }
+
         $route = $this->container->get('request_stack')->getCurrentRequest()->get('_route');
-        foreach ($component->getRoutes() as $regex) {
+        foreach ($routes as $regex) {
             if (preg_match('#' . $regex . '#', $route)) {
                 return true;
             }
