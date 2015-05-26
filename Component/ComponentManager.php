@@ -3,8 +3,8 @@ namespace Igdr\Bundle\LayoutComponentBundle\Component;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
+use Symfony\Component\HttpKernel\Controller\ControllerReference;
 
 /**
  * Class Manager
@@ -90,9 +90,10 @@ class ComponentManager implements ContainerAwareInterface
      */
     private function renderComponent(Component $component)
     {
-        $request = clone $this->container->get('request_stack')->getMasterRequest()->duplicate();
-        $request->attributes->set('_controller', $component->getController());
+        $request = $this->container->get('request_stack')->getMasterRequest();
 
-        return $this->container->get('http_kernel')->handle($request)->getContent();
+        $reference = new ControllerReference($component->getController(), $request->attributes->all(), $request->query->all());
+
+        return $this->container->get('fragment.handler')->render($reference);
     }
 }
