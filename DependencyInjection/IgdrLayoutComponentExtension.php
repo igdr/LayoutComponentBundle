@@ -42,7 +42,7 @@ class IgdrLayoutComponentExtension extends Extension
         foreach ($container->getParameter('kernel.bundles') as $bundle) {
             $reflection = new \ReflectionClass($bundle);
             if (is_file($file = dirname($reflection->getFilename()) . '/Resources/config/layout.yml')) {
-                $bundleConfig = Yaml::parse(realpath($file));
+                $bundleConfig = Yaml::parse(file_get_contents(realpath($file)));
                 if (is_array($bundleConfig)) {
                     $configuredPlaces = array_replace_recursive($configuredPlaces, $bundleConfig);
                 }
