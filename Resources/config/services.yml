@@ -3,11 +3,11 @@ services:
         arguments: [%igdr_layout_component.places%]
         class: Igdr\Bundle\LayoutComponentBundle\Component\ComponentManager
         calls:
-            - [setContainer, [@service_container]]
+            - [setContainer, ["@service_container"]]
 
     igdr_layout_component.twig.component_extention:
         class: Igdr\Bundle\LayoutComponentBundle\Twig\ComponentExtension
         calls:
-            - [setComponentManager, [@igdr_layout_component.component.component_manager]]
+            - [setComponentManager, ["@igdr_layout_component.component.component_manager"]]
         tags:
             - { name: twig.extension }
